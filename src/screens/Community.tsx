@@ -2,7 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext} from 'react';
 import imagePath from '../constants/imagePath';
 import {ThemeContext} from '../context/ThemeContext';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
 export default function Community() {
   const {theme} = useContext(ThemeContext);
@@ -34,9 +34,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: scale(20),
-    paddingVertical: verticalScale(5),
     gap: scale(10),
+    width: '100%',
   },
   img: {
     width: scale(210),
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     marginTop: verticalScale(5),
     lineHeight: verticalScale(20),
+    paddingHorizontal: moderateScale(20),
     textAlign: 'center',
   },
   buttonText: {

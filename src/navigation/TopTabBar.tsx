@@ -13,9 +13,9 @@ export default function TopTabBar() {
 
   return (
     <Tab.Navigator
+      initialRouteName="Chats"
       screenOptions={() => ({
         tabBarActiveTintColor: theme.tertiary,
-        tabBarInactiveTintColor: theme.secondary,
         tabBarIndicatorStyle: {
           backgroundColor: theme.tertiary,
         },

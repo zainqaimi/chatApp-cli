@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // backgroundColor: th,
     padding: moderateScale(15),
   },
   textLogo: {

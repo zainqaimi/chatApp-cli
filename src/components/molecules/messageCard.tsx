@@ -1,7 +1,17 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {ThemeContext} from '../../context/ThemeContext';
+import VectorIcon from '../../utils/VectorIcon';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+// import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
+type RootStackParamList = {
+  ChatScreen: undefined;
+};
+
+type NavigationProp = StackNavigationProp<RootStackParamList, 'ChatScreen'>;
 const MessageCard = ({
   image,
   name,
@@ -10,35 +20,55 @@ const MessageCard = ({
   messageCount,
   logoComponent,
   rightIcon,
+  isMute,
   unread,
 }: any) => {
+  const {theme} = useContext(ThemeContext);
+  const navigation = useNavigation<NavigationProp>();
+  const onNavigate = () => {
+    navigation.navigate('ChatScreen');
+  };
   return (
-    <TouchableOpacity style={styles.btn}>
+    <TouchableOpacity
+      onPress={onNavigate}
+      style={[styles.btn, {backgroundColor: theme.background}]}>
       <View style={styles.leftContainer}>
         <View>
           <Image source={image} style={styles.img} />
           {logoComponent}
         </View>
         <View>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.message}>{message}</Text>
+          <Text style={[styles.name, {color: theme.text}]}>{name}</Text>
+          <Text style={[styles.message, {color: theme.text}]}>{message}</Text>
         </View>
       </View>
       <View style={styles.rightContainer}>
-        {time && <Text style={styles.time}>{time}</Text>}
+        {time && <Text style={[styles.time, {color: theme.text}]}>{time}</Text>}
         {!!messageCount && (
-          <View style={styles.messageCountContainer}>
-            <Text style={styles.messageCount}>{messageCount}</Text>
+          <View style={{flexDirection: 'row', gap: moderateScale(5)}}>
+            {isMute ? (
+              <VectorIcon
+                type="FontAwesome"
+                name="bell-slash-o"
+                size={16}
+                color={theme.secondary}
+              />
+            ) : null}
+
+            <View
+              style={[
+                styles.messageCountContainer,
+                {backgroundColor: theme.tertiary},
+              ]}>
+              <Text style={styles.messageCount}>{messageCount}</Text>
+            </View>
           </View>
         )}
         {rightIcon}
       </View>
-      {/* <View style={styles.unread}></View> */}
     </TouchableOpacity>
   );
 };
-
-export default MessageCard;
 
 const styles = StyleSheet.create({
   btn: {
@@ -100,3 +130,5 @@ const styles = StyleSheet.create({
   },
   unread: {},
 });
+
+export default MessageCard;
