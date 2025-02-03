@@ -6,9 +6,19 @@ import {chatData} from '../data/ChatListData';
 import VectorIcon from '../utils/VectorIcon';
 import {ThemeContext} from '../context/ThemeContext';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
+type RootStackParamList = {
+  ChatScreen: undefined;
+};
 
+type NavigationProp = StackNavigationProp<RootStackParamList, 'ChatScreen'>;
 export default function ChatsList() {
   const {theme} = useContext(ThemeContext);
+  const navigation = useNavigation<NavigationProp>();
+  const onNavigate = () => {
+    navigation.navigate('ChatScreen');
+  };
   return (
     <View style={styles.container}>
       <FlatList
@@ -22,6 +32,7 @@ export default function ChatsList() {
             time={item.time}
             messageCount={item.messageCount}
             isMute={item.mute}
+            onPress={onNavigate}
           />
         )}
       />

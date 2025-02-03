@@ -3,15 +3,7 @@ import React, {useContext, useState} from 'react';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
 import {ThemeContext} from '../../context/ThemeContext';
 import VectorIcon from '../../utils/VectorIcon';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-// import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type RootStackParamList = {
-  ChatScreen: undefined;
-};
-
-type NavigationProp = StackNavigationProp<RootStackParamList, 'ChatScreen'>;
 const MessageCard = ({
   image,
   name,
@@ -21,16 +13,13 @@ const MessageCard = ({
   logoComponent,
   rightIcon,
   isMute,
-  unread,
+  onPress,
 }: any) => {
   const {theme} = useContext(ThemeContext);
-  const navigation = useNavigation<NavigationProp>();
-  const onNavigate = () => {
-    navigation.navigate('ChatScreen');
-  };
+
   return (
     <TouchableOpacity
-      onPress={onNavigate}
+      onPress={onPress}
       style={[styles.btn, {backgroundColor: theme.background}]}>
       <View style={styles.leftContainer}>
         <View>
