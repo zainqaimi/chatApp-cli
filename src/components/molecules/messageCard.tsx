@@ -1,7 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
-import {ThemeContext} from '../../context/ThemeContext';
+import {theme, ThemeContext} from '../../context/ThemeContext';
 import VectorIcon from '../../utils/VectorIcon';
 
 const MessageCard = ({
@@ -13,14 +13,13 @@ const MessageCard = ({
   logoComponent,
   rightIcon,
   isMute,
+  callIcon,
   onPress,
 }: any) => {
   const {theme} = useContext(ThemeContext);
 
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.btn, {backgroundColor: theme.background}]}>
+    <TouchableOpacity onPress={onPress} style={styles.btn}>
       <View style={styles.leftContainer}>
         <View>
           <Image source={image} style={styles.img} />
@@ -28,7 +27,24 @@ const MessageCard = ({
         </View>
         <View>
           <Text style={[styles.name, {color: theme.text}]}>{name}</Text>
-          <Text style={[styles.message, {color: theme.text}]}>{message}</Text>
+          <View style={[callIcon ? styles.callIconContainer : null]}>
+            {callIcon === 'missedCall' ? (
+              <VectorIcon
+                type="MaterialCommunityIcons"
+                name="phone-incoming"
+                size={18}
+                color={theme.red}
+              />
+            ) : callIcon === 'receivedCall' ? (
+              <VectorIcon
+                type="MaterialCommunityIcons"
+                name="phone-outgoing"
+                size={18}
+                color={theme.green}
+              />
+            ) : null}
+            <Text style={[styles.message, {color: theme.text}]}>{message}</Text>
+          </View>
         </View>
       </View>
       <View style={styles.rightContainer}>
@@ -64,8 +80,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: verticalScale(10),
-    paddingHorizontal: moderateScale(10),
+    paddingHorizontal: moderateScale(15),
     justifyContent: 'space-between',
+    backgroundColor: theme.background,
   },
   leftContainer: {
     flexDirection: 'row',
@@ -117,7 +134,11 @@ const styles = StyleSheet.create({
     fontWeight: 'semibold',
     lineHeight: verticalScale(18),
   },
-  unread: {},
+  callIconContainer: {
+    flexDirection: 'row',
+    gap: moderateScale(5),
+    marginTop: verticalScale(5),
+  },
 });
 
 export default MessageCard;

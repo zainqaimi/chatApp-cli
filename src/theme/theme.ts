@@ -10,6 +10,7 @@ export const lightTheme = {
     text: '#cdd4da',
     textGrey: '#8b959a',
     red: '#e53f43',
+    green: 'green'
   };
   
   export const darkTheme = {
@@ -24,4 +25,5 @@ export const lightTheme = {
   text: '#cdd4da',
   textGrey: '#8b959a',
   red: '#e53f43',
+  green: 'green'
   };

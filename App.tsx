@@ -6,6 +6,7 @@ import {ThemeContext} from './src/context/ThemeContext';
 import {createStackNavigator} from '@react-navigation/stack';
 import ChatsList from './src/screens/ChatsList';
 import ChatScreen from './src/screens/ChatScreen';
+import ContactList from './src/screens/ContactList';
 
 const Stack = createStackNavigator();
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
+        <Stack.Screen name="ContactList" component={ContactList} />
       </Stack.Navigator>
     </NavigationContainer>
   );
