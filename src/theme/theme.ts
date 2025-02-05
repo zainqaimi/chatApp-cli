@@ -3,7 +3,7 @@ export const lightTheme = {
     secondary: '#9da3a9',
     tertiary: '#0aad93',
     teal: '#36897f',
-    background: '#101d25',
+    background: 'green',
     white: '#FFFFFF',
     black: '#000000',
     blue: '#34b7f1',
@@ -25,4 +25,3 @@ export const lightTheme = {
   textGrey: '#8b959a',
   red: '#e53f43',
   };
-  
