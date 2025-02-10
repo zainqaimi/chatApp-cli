@@ -11,6 +11,8 @@
     "windows": "npx @react-native-community/cli run-windows"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^21.7.2",
+    "@react-native-firebase/firestore": "^21.7.2",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-navigation/material-top-tabs": "^7.1.0",
     "@react-navigation/native": "^7.0.14",

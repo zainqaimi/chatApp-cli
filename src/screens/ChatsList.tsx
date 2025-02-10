@@ -44,7 +44,7 @@ export default function ChatsList() {
       <TouchableOpacity
         activeOpacity={5}
         onPress={() => navigation.navigate('ContactList')}>
-        <View style={[styles.addBtn, {backgroundColor: theme.tertiary}]}>
+        <View style={styles.addBtn}>
           <VectorIcon
             type="MaterialCommunityIcons"
             name="message-plus"
@@ -64,10 +64,10 @@ const styles = StyleSheet.create({
   },
   addBtn: {
     position: 'absolute',
-    bottom: verticalScale(30),
+    bottom: verticalScale(50),
     right: moderateScale(15),
-    backgroundColor: '#333',
-    padding: 12,
+    backgroundColor: theme.tertiary,
+    padding: moderateScale(16),
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',

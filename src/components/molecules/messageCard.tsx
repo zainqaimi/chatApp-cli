@@ -1,7 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
-import {theme, ThemeContext} from '../../context/ThemeContext';
+import {theme} from '../../context/ThemeContext';
 import VectorIcon from '../../utils/VectorIcon';
 
 const MessageCard = ({
@@ -16,8 +16,6 @@ const MessageCard = ({
   callIcon,
   onPress,
 }: any) => {
-  const {theme} = useContext(ThemeContext);
-
   return (
     <TouchableOpacity onPress={onPress} style={styles.btn}>
       <View style={styles.leftContainer}>
