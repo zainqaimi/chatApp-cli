@@ -1,6 +1,5 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useContext} from 'react';
-import imagePath from '../constants/imagePath';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 import MessageCard from '../components/molecules/messageCard';
 import {chatData} from '../data/ChatListData';
 import VectorIcon from '../utils/VectorIcon';
@@ -8,9 +7,10 @@ import {theme, ThemeContext} from '../context/ThemeContext';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
+import {getDeviceId} from '../utils/helper';
 type RootStackParamList = {
   ChatScreen: undefined;
-  ContactList: undefined;
+  ContactList: {userId: string | undefined};
 };
 
 type NavigationProp = StackNavigationProp<
@@ -20,10 +20,16 @@ type NavigationProp = StackNavigationProp<
 >;
 export default function ChatsList() {
   const {theme} = useContext(ThemeContext);
+  const [userId, setUserId] = useState<string | undefined>(undefined);
   const navigation = useNavigation<NavigationProp>();
+  useEffect(() => {
+    getDeviceId().then(id => setUserId(id));
+  }, []);
   const onNavigate = () => {
     navigation.navigate('ChatScreen');
   };
+  console.log('userId', userId);
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -43,7 +49,7 @@ export default function ChatsList() {
       />
       <TouchableOpacity
         activeOpacity={5}
-        onPress={() => navigation.navigate('ContactList')}>
+        onPress={() => navigation.navigate('ContactList', {userId})}>
         <View style={styles.addBtn}>
           <VectorIcon
             type="MaterialCommunityIcons"
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
   addBtn: {
     position: 'absolute',
     bottom: verticalScale(50),
-    right: moderateScale(15),
+    right: moderateScale(20),
     backgroundColor: theme.tertiary,
     padding: moderateScale(16),
     borderRadius: 10,

@@ -3,8 +3,12 @@ import React, {useContext, useState} from 'react';
 import VectorIcon from '../../../utils/VectorIcon';
 import {ThemeContext} from '../../../context/ThemeContext';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-
-const ChatFooter = () => {
+import firestore from '@react-native-firebase/firestore';
+type ChatFooterProps = {
+  chatRef: any;
+  userId: string | undefined;
+};
+const ChatFooter = ({chatRef, userId}: ChatFooterProps) => {
   const [message, setMessage] = useState('');
   const [sendEnable, setSendEnable] = useState(false);
   const {theme} = useContext(ThemeContext);
@@ -14,11 +18,11 @@ const ChatFooter = () => {
   };
 
   const onSend = () => {
-    // chatRef.collection('messages').add({
-    //   body: message,
-    //   sender: userId,
-    //   timestamp: firestore.FieldValue.serverTimestamp(),
-    // });
+    chatRef.collection('messages').add({
+      body: message,
+      sender: userId,
+      timestamp: firestore.FieldValue.serverTimestamp(), // firebase timestamp
+    });
     setMessage('');
     setSendEnable(false);
   };
