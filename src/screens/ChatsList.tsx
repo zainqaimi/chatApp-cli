@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
   addBtn: {
     position: 'absolute',
     bottom: verticalScale(50),
-    right: moderateScale(20),
+    right: moderateScale(15),
     backgroundColor: theme.tertiary,
-    padding: moderateScale(16),
+    padding: moderateScale(14),
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
